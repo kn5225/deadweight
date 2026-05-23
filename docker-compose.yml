@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: deadweight
+      WORDPRESS_DB_PASSWORD: deadweight123
+      WORDPRESS_DB_NAME: deadweight_db
+    volumes:
+      - ./plugin:/var/www/html/wp-content/plugins/deadweight
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: deadweight_db
+      MYSQL_USER: deadweight
+      MYSQL_PASSWORD: deadweight123
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
