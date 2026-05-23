@@ -39,3 +39,13 @@ function deadweight_render_audit() {
     include DEADWEIGHT_PATH . 'templates/audit.php';
     return ob_get_clean();
 }
+function deadweight_enqueue_assets() {
+    wp_enqueue_script(
+        'deadweight-script',
+        DEADWEIGHT_URL . 'assets/script.js',
+        array(),
+        DEADWEIGHT_VERSION,
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'deadweight_enqueue_assets');
